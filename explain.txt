@@ -1,0 +1,8 @@
+These tests have been automated because:
+
+
+- they are run frequently (after every build) and require large amounts of data to perform the same action
+- these tests tend to cause human error
+- these tests require multiple data sets
+- cover frequently used functionality that introduces high risk conditions
+- these tests take a lot of effort and time when manual testing
