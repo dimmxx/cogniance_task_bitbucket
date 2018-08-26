@@ -14,40 +14,52 @@ class Test(unittest.TestCase):
     # valid access token and workoutId
     def test_workoutById1(self):
        api = ServerApi()
-       self.assertEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', '219453846').status_code)
+       self.assertEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', 219453846).status_code)
 
     # invalid access token
     def test_workoutById2(self):
          api = ServerApi()
-         self.assertNotEqual(200, api.workoutByWorkoutId('ghetaejkls12ap4dfo3erry425dmmtunv', '219453846').status_code)
+         self.assertNotEqual(200, api.workoutByWorkoutId('ghetaejkls12ap4dfo3erry425dmmtunv', 219453846).status_code)
 
     # missing access token
     def test_workoutById3(self):
          api = ServerApi()
-         self.assertNotEqual(200, api.workoutByWorkoutId('', '219453846').status_code)
+         self.assertNotEqual(200, api.workoutByWorkoutId('', 219453846).status_code)
 
-    # missing access token and workoutId
+    # missing workoutId
     def test_workoutById4(self):
          api = ServerApi()
-         self.assertNotEqual(200, api.workoutByWorkoutId('', '').status_code)
+         self.assertNotEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', '').status_code)
 
     # invalid workoutId
     def test_workoutById5(self):
          api = ServerApi()
-         self.assertNotEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', '245').status_code)
+         self.assertNotEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', 1).status_code)
 
     # invalid workouyId - negative
     def test_workoutById6(self):
          api = ServerApi()
-         self.assertNotEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', '-219453846').status_code)
+         self.assertNotEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', -1).status_code)
+
+    # invalid workouyId - zero
+    def test_workoutById7(self):
+         api = ServerApi()
+         self.assertNotEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', 0).status_code)
+
+
+    # invalid workouyId - float
+    def test_workoutById8(self):
+         api = ServerApi()
+         self.assertNotEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', 1.1).status_code)
+
 
     # invalid workouyId - non numeric values
-    def test_workoutById7(self):
+    def test_workoutById9(self):
          api = ServerApi()
          self.assertNotEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', 'fge').status_code)
 
     # invalid workouyId - service symbols
-    def test_workoutById8(self):
+    def test_workoutById10(self):
          api = ServerApi()
          self.assertNotEqual(200, api.workoutByWorkoutId('abdejkls12ap4dfololjnbdgs3dvfaa', '#$@').status_code)
 
@@ -162,7 +174,7 @@ class Test(unittest.TestCase):
                                                     -1,\
                                                     1).status_code)
 
-    # invalid limit - < 1000
+    # invalid limit - > 1000
     def test_workoutByExceciserUuid11(self):
        api = ServerApi()
        self.assertNotEqual(200, api.workoutByExceciserUuid('abdejkls12ap4dfololjnbdgs3dvfaa',\
@@ -228,7 +240,7 @@ class Test(unittest.TestCase):
                                                     1).status_code)
 
 
-    # invalid date - one date, not a period
+    # invalid date - single date, not a period
     def test_workoutByExceciserUuid17(self):
        api = ServerApi()
        self.assertNotEqual(200, api.workoutByExceciserUuid('abdejkls12ap4dfololjnbdgs3dvfaa',\

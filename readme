@@ -1,0 +1,81 @@
+Cogniace task for QA intern position
+
+
+Task 4. Automation tests
+
+
+
+
+4. NICE TO HAVE. Automation tests
+Task: Create auto test following the requirements below
+Git/bitbucket:
+1. Go to ​ https://bitbucket.org/
+2. Sign up
+3. Create a ​ Private ​ Repository, later put ​ all​ results of all tasks ​ into your repo​ .
+Share it with user ‘Cogniance_QA_Interview’
+4. All actions​ are expected to be done ​ via command line​ . Do not install any GUI
+clients for Git.
+5. "Read me" file with description how to use your code is a MUST!*
+*Note. Code that can not be launched via steps described in the “Readme” file is not
+accepted! All external libraries used in the task should be mentioned in “Read me”.
+Home task will be considered as failed in case mentioned requirements were not met.
+Python:
+Using API from “OK LEVEL 2” cover two any endpoint from
+https://api.netpulse.com/documentation/partner/#!/workouts/workouts
+NOTE: Cover only cases that in your opinion should be covered by automation tests
+Output should be:
+1. Python project on ​ https://bitbucket.org/​ ​ in you Private​ ​ Repository shared with our
+user, so we could check =)
+2. Explain.txt file with explanation why you cover these cases
+3. Be prepared to explain your code and everything that is used inside
+
+
+
+
+
+
+Created by Dmytro Borysov
+Environment: PyCharm 2018.2.2 (Community Edition)
+
+
+Server: http://qainterview.cogniance.com/candidates
+
+API Documentation:
+
+Server allowed methods:
+
+GET, http://qainterview.cogniance.com/candidates/, gives a list of all candidates.
+
+GET, http://qainterview.cogniance.com/candidates/<cand_id>, shows a candidate with id=<cand_id>.
+
+POST, http://qainterview.cogniance.com/candidates/, adds a new candidate.
+
+DELETE, http://qainterview.cogniance.com/candidates/<cand_id>, deletes a candidate with id=<cand_id>.
+
+For running scripts you need:
+
+open Command line
+
+move to folder with scripts
+
+run comand: python name_file.py or python name_file.py -b
+
+My project contain next files:
+
+1. ServerApi.py
+
+This file contain methods that implement current API.
+
+2. Test.py
+
+Contain tests methods. First methods check the correctness work on way of the of comparing status_code with the most familiar codes (200, 201 and other). Three last tests(test_checkDelete, test_checkShowById, test_chekAdd) verefy that methods working as expected.
+
+Note: Running 19 tests:
+
+18 successfully,
+
+one failed. Method GET/<cand_id> do not work as expected. If exist record with this <cand_id> response show us record with the smallest <cand_id> in all list or first record in this list.
+
+3. Datamining.py
+
+This script calculates % of successful requests per hour from file dataminung.log and store answer in file result in next format: Hour: #. Count of all request: #. Count of success request: #. Result = #%
