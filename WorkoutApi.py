@@ -1,5 +1,6 @@
 import requests
 
+API_URL = 'https://api.netpulse.com/np/workouts-partner/v1.0/'
 
 class ServerApi():
 
@@ -7,7 +8,7 @@ class ServerApi():
     def workoutByExceciserUuid (self, token, uuid, categoryId, modifiedAt, limit, page):
 
         headers = {'content-type': 'application/json', 'access_token': token, }
-        r = requests.get('https://api.netpulse.com/np/workouts-partner/v1.0/exercisers/'
+        r = requests.get(API_URL + 'exercisers/'
                 + str(uuid) + '/workouts?'
                 + 'categoryId=' + str(categoryId)
                 + '&modifiedAt=' + str(modifiedAt)
@@ -19,5 +20,5 @@ class ServerApi():
     def workoutByWorkoutId (self, token, workoutId):
 
         headers = {'content-type': 'application/json', 'access_token': token, }
-        r = requests.get('https://api.netpulse.com/np/workouts-partner/v1.0/workouts/' + str(workoutId), headers=headers)
+        r = requests.get(API_URL + 'workouts/' + str(workoutId), headers=headers)
         return r

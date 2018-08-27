@@ -1,0 +1,119 @@
+/*
+FITNESS DB STRUCTURE:
+
+Table 1: Locations
+locationUuid (Primary key)
+name
+city
+phone
+
+Table 2: Users
+exerciserUuid (Primary key)
+firstName
+lastName
+birthDate
+homeClubUuid
+
+Table 3: Workout
+workoutId (Primary key)
+exerciserUuid
+categoryId
+workoutDateUtc
+duration
+Calories
+*/
+
+CREATE database fitness;
+USE fitness;
+
+CREATE TABLE Locations (
+       locationUuid CHAR(255) PRIMARY KEY,
+       name CHAR(255),
+       city CHAR(255),
+       phone CHAR(255)
+);
+CREATE TABLE Users (
+       exerciserUuid CHAR(255) PRIMARY KEY,
+       firstName CHAR(255),
+       lastName CHAR(255),
+       birthDate CHAR(255),
+       homeClubUuid CHAR(255)
+);
+CREATE TABLE Workout (
+        workoutId INTEGER PRIMARY KEY,
+        exerciserUuid CHAR(255),
+       categoryId INTEGER,
+       workoutDateUtc DATE,
+       duration INTEGER,
+       calories INTEGER
+);
+
+INSERT INTO Locations (locationUuid, name, city, phone)
+VALUES
+('9c1fba16-059c-4f0a-9020-2d2d20184eba', 'University Sport and Fitness', 'San Francisco', '+21095784-8755');
+INSERT INTO Locations  (locationUuid, name, city, phone)
+VALUES
+('981985a1c-2db3-4a06-b76d-fbe70bafef0c', 'Netpulse UK', 'Epsom', '+41075784-7744');
+INSERT INTO Locations (locationUuid, name, city, phone)
+VALUES
+('4e6c373c-a5e4-4a74-a1c4-aec5db63fe60', 'University Sport and Fitness eGYM', 'Epsom', '+41075784-7744');
+INSERT INTO Locations (locationUuid, name, city, phone)
+VALUES
+('ff5c9efc-e365-4881-86c4-6403006b14e4', 'University Sport and Fitness Iberia', 'Madrid', '+71075794-2157');
+
+INSERT INTO Users (exerciserUuid, firstName, lastName, birthDate, homeClubUuid)
+VALUES
+('bdc3c6e6-cf78-41a7-9817-50decb4f4a05', 'John', 'Smith', '2000-03-01', '9c1fba16-059c-4f0a-9020-2d2d20184eba');
+INSERT INTO Users (exerciserUuid, firstName, lastName, birthDate, homeClubUuid)
+VALUES
+('8249cbb8-44f9-46b4-a387-3efa5352f619', 'Peter', 'Oliver', '1998-04-05', '981985a1c-2db3-4a06-b76d-fbe70bafef0c');
+INSERT INTO Users (exerciserUuid, firstName, lastName, birthDate, homeClubUuid)
+VALUES
+('7bb0b7dc-5ca1-46fb-bb36-1a25b5b8afe7', 'Helen', 'Arnaut', '1939-10-01', '4e6c373c-a5e4-4a74-a1c4-aec5db63fe60');
+INSERT INTO Users (exerciserUuid, firstName, lastName, birthDate, homeClubUuid)
+VALUES
+('ae5f07bd-3566-4ec6-a338-9082b3e44cc1', 'Chris', 'Galipo', '1990-05-05', 'ff5c9efc-e365-4881-86c4-6403006b14e4');
+INSERT INTO Users (exerciserUuid, firstName, lastName, birthDate, homeClubUuid)
+VALUES
+('ge5f06bd-3566-4ec6-a338-9082b3e44ll4', 'Donald', 'Duck', '1999-05-05', 'ff5c9efc-e365-4881-86c4-6403006b14e4');
+
+
+INSERT INTO Workout (workoutId, exerciserUuid, categoryId, workoutDateUtc, duration, calories)
+VALUES
+ ('219247221', 'bdc3c6e6-cf78-41a7-9817-50decb4f4a05', '12', '2018-03-03', '300', '145');
+INSERT INTO Workout (workoutId, exerciserUuid, categoryId, workoutDateUtc, duration, calories)
+VALUES
+('219453674', '8249cbb8-44f9-46b4-a387-3efa5352f619', '1', '2018-04-25', '5500', '615');
+INSERT INTO Workout (workoutId, exerciserUuid, categoryId, workoutDateUtc, duration, calories)
+VALUES
+('219456987', '7bb0b7dc-5ca1-46fb-bb36-1a25b5b8afe7', '21', '2018-03-03', '800', '500');
+INSERT INTO Workout (workoutId, exerciserUuid, categoryId, workoutDateUtc, duration, calories)
+VALUES
+('219458856', 'ae5f07bd-3566-4ec6-a338-9082b3e44cc1', '54', '2018-03-05', '8000', '1900');
+INSERT INTO Workout (workoutId, exerciserUuid, categoryId, workoutDateUtc, duration, calories)
+VALUES
+('219458111', 'ge5f06bd-3566-4ec6-a338-9082b3e44ll4', '57', '2018-07-05', '2100', '1200');
+
+
+SELECT name, city
+FROM Locations
+WHERE city = 'Madrid';
+
+
+SELECT firstName, lastName, birthdate
+FROM Users
+WHERE MONTH(birthDate) = 5;
+
+
+SELECT COUNT(exerciserUuid), name
+FROM Users
+INNER JOIN Locations ON locationUuid = homeClubUuid
+GROUP BY name
+ORDER BY name ASC
+
+
+SELECT firstName, lastName, homeclubUuid, workoutDateUtc, categoryID, duration, calories
+FROM Users
+INNER JOIN Workout ON Users.exerciserUuid = Workout.exerciserUuid
+WHERE homeClubUuid = 'ff5c9efc-e365-4881-86c4-6403006b14e4' AND duration > 800
+
