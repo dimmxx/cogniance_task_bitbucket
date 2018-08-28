@@ -30,7 +30,7 @@ The test project contains 4 files:
 *all the automated tests are described in Task 2 (https://docs.google.com/spreadsheets/d/1yWqw2L-0FPWitJUqmJcULFC3qwqaAN3uyz7qIbEUIMQ/edit?usp=sharing)
 
 
-TASK 5. Datamining
+TASK 5. DATAMINING
 ------------------
 To run the datamining script: - open bash - change dir where the files are located - run the command $ ./dm_script (the file datamining.log must be located in the same dir)
 
